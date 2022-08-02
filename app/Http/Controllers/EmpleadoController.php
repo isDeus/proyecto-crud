@@ -55,7 +55,9 @@ class EmpleadoController extends Controller
 
         Empleado::insert($datosEmpleado);
 
-        return response()->json($datosEmpleado);
+        //return response()->json($datosEmpleado);
+        /* Se hace redirección a empleado (index) que recibe un mensaje */
+        return redirect('empleado')->with('mensaje','Empleado agregado con éxito');
     }
 
     /**
@@ -133,6 +135,6 @@ class EmpleadoController extends Controller
 
 
         /* Se devuelve una redirección a empleado */
-        return redirect('empleado');
+        return redirect('empleado')->with('mensaje', 'Empleado Borrado');
     }
 }
