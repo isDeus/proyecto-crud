@@ -94,8 +94,14 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleado $empleado)
+
+    /* Se cambia el paremetro para recibir el id  */
+    public function destroy($id)
     {
         //
+        /* Utiliza el parametro $id que viene desde index.blade.php para eliminar */
+        Empleado::destroy($id);
+        /* Se devuelve una redirección a empleado */
+        return redirect('empleado');
     }
 }
