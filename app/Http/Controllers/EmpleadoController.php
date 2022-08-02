@@ -124,8 +124,14 @@ class EmpleadoController extends Controller
     public function destroy($id)
     {
         //
-        /* Utiliza el parametro $id que viene desde index.blade.php para eliminar */
-        Empleado::destroy($id);
+        /* Se busca la información, después se intenta borrar fisicamente desde la url que incluye empleado foto */
+        $empleado=Empleado::findOrFail($id);
+        if(Storage::delete('public/'.$empleado->Foto)){
+            /* Utiliza el parametro $id que viene desde index.blade.php para eliminar */
+            Empleado::destroy($id);
+        }
+
+
         /* Se devuelve una redirección a empleado */
         return redirect('empleado');
     }
