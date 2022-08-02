@@ -87,9 +87,17 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleado $empleado)
+    public function update(Request $request, $id)
     {
         //
+        /* Se reciben todos los datos a excepción del token y el método */
+        $datosEmpleado = request()->except(['_token','_method']);
+        /* Se hace un where comparando los id, cuando se encuentra entonces se hace un update con los nuevos datos */
+        Empleado::where('id','=',$id)->update($datosEmpleado);
+        /* Se vuelve a buscar la información con ese id y se devuelve a ese formulario pero con los datos actualizados */
+        $empleado=Empleado::findOrFail($id);
+        return view('empleado.edit', compact('empleado'));
+
     }
 
     /**
