@@ -71,11 +71,13 @@ class EmpleadoController extends Controller
      * @param  \App\Models\Empleado  $empleado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleado $empleado)
+    public function edit($id)
     {
         //
-        /* Se develve la vista de edit */
-        return view('empleado.edit');
+        /* Se busca la información según el ID de parámetro usando un metodo del modelo y se almacena en una variable */
+        $empleado=Empleado::findOrFail($id);
+        /* Se develve la vista de edit y le pasamos esa información*/
+        return view('empleado.edit', compact('empleado'));
     }
 
     /**
