@@ -1,6 +1,7 @@
 {{-- Formulario de empleado que es reutilizado en otras partes --}}
 {{-- Se añaden los values en cada input para recibir (si es que existen) los valores y así poder mostrarlos --}}
 {{-- Se refactorizó para mostrar o no los valores si es que existen (con isset) --}}
+<h1>{{$modo}} empleado</h1>
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{ isset($empleado->Nombre)?$empleado->Nombre:''}}" id="Nombre">
 <br>
@@ -24,7 +25,7 @@
 <input type="file" name="Foto" value="" id="Foto">
 <br>
 
-<input type="submit" value="Guardar datos">
+<input type="submit" value="{{$modo}} datos">
 
 <a href="{{url('empleado/')}}">Regresar</a>
 

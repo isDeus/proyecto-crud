@@ -6,6 +6,7 @@ Formulario de edición de empleado
 {{method_field('PATCH')}}
 
 {{-- Se incluye el cuestionario --}}
-@include('empleado.form')
+{{-- Se añade una variable en el include para especificar de dónde viene el include hacia form --}}
+@include('empleado.form', ['modo'=>'Editar']);
 
 </form>
