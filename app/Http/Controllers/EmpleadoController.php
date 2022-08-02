@@ -114,6 +114,29 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        /* Se añade un array de datos requeridos para su inserción en la BD */
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'Correo'=>'required|email',
+        ];
+        /* Se añade el mensaje si no existe el valor requerido */
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+
+        /* El usuario no necesariamente tiene que adjuntar otra foto, se valida sólo cuando la foto existe */
+        if($request->hasFile('Foto')){
+            $campos=['Foto'=>'required|max:10000|mimes:jpeg,png,jpg',];
+            $mensaje=['Foto.required'=>'La foto es requerida'];
+        }
+
+        /* Se hace la validación */
+        $this->validate($request, $campos, $mensaje);
+
+
         /* Se reciben todos los datos a excepción del token y el método */
         $datosEmpleado = request()->except(['_token','_method']);
         /* Se hace un where comparando los id, cuando se encuentra entonces se hace un update con los nuevos datos */
