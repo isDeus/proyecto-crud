@@ -18,22 +18,22 @@
 
 <div class="form-group">
 <label for="Nombre">Nombre</label>
-<input type="text" name="Nombre" value="{{ isset($empleado->Nombre)?$empleado->Nombre:''}}" id="Nombre" class="form-control">
+<input type="text" name="Nombre" value="{{ isset($empleado->Nombre)?$empleado->Nombre:old('Nombre')}}" id="Nombre" class="form-control">
 </div>
 
 <div class="form-group">
 <label for="ApellidoPaterno">Apellido Paterno</label>
-<input type="text" name="ApellidoPaterno" value="{{ isset($empleado->ApellidoPaterno)?$empleado->ApellidoPaterno:''}}" id="ApellidoPaterno" class="form-control">
+<input type="text" name="ApellidoPaterno" value="{{ isset($empleado->ApellidoPaterno)?$empleado->ApellidoPaterno:old('ApellidoPaterno')}}" id="ApellidoPaterno" class="form-control">
 </div>
 
 <div class="form-group">
 <label for="ApellidoMaterno">Apellido Materno</label>
-<input type="text" name="ApellidoMaterno" value="{{ isset($empleado->ApellidoMaterno)?$empleado->ApellidoMaterno:''}}" id="ApellidoMaterno" class="form-control">
+<input type="text" name="ApellidoMaterno" value="{{ isset($empleado->ApellidoMaterno)?$empleado->ApellidoMaterno:old('ApellidoMaterno')}}" id="ApellidoMaterno" class="form-control">
 </div>
 
 <div class="form-group">
 <label for="Correo">Correo</label>
-<input type="text" name="Correo" value="{{ isset($empleado->Correo)?$empleado->Correo:''}}" id="Correo" class="form-control">
+<input type="text" name="Correo" value="{{ isset($empleado->Correo)?$empleado->Correo:old('Correo')}}" id="Correo" class="form-control">
 </div>
 
 <div class="form-group">
