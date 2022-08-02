@@ -23,7 +23,14 @@ Mostrar la lista de empleados
             <td>{{$empleado->ApellidoPaterno}}</td>
             <td>{{$empleado->ApellidoMaterno}}</td>
             <td>{{$empleado->Correo}}</td>
-            <td>Editar |
+            <td>
+
+            {{-- Se genera un href que redirige hacia la url de empleado + id + edit  --}}
+            <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}">
+                Editar
+            </a>
+
+            |
 
             {{-- Se crea un boton que envia la información a empleado junto con id a través de un post --}}
             <form action="{{ url('/empleado/'.$empleado->id) }}" method="POST">
