@@ -6,6 +6,6 @@ Formulario de edición de empleado
 {{method_field('PATCH')}}
 
 {{-- Se incluye el cuestionario --}}
-@include('empleado.form');
+@include('empleado.form')
 
 </form>

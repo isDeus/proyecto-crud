@@ -22,7 +22,7 @@ Mostrar la lista de empleados
 
             <td>
                 {{-- Se muestra la imagen que está en storage y que tiene la ruta en empleado -> foto --}}
-                <img src="{{asset('storage').'/'.$empleado->Foto}}" alt="">
+                <img src="{{asset('storage').'/'.$empleado->Foto}}" width="100" alt="">
             </td>
 
             <td>{{$empleado->Nombre}}</td>

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 
+/* Se agregó este uso para poder hacer uso del delete en el storage (en update) */
+use Illuminate\Support\Facades\Storage;
+
 class EmpleadoController extends Controller
 {
     /**
@@ -45,6 +48,7 @@ class EmpleadoController extends Controller
         //$datosEmpleado = $request->all();
         $datosEmpleado = $request->except('_token');
 
+        /* Si la fotografía existe se guarda en storage */
         if($request->hasFile('Foto')){
             $datosEmpleado['Foto']=$request->file('Foto')->store('uploads', 'public');
         }
@@ -93,6 +97,15 @@ class EmpleadoController extends Controller
         /* Se reciben todos los datos a excepción del token y el método */
         $datosEmpleado = request()->except(['_token','_method']);
         /* Se hace un where comparando los id, cuando se encuentra entonces se hace un update con los nuevos datos */
+
+        if($request->hasFile('Foto')){
+            $empleado=Empleado::findOrFail($id);
+            /* Se elimina la foto antigua si es que viene una foto nueva en el update */
+            Storage::delete('public/'.$empleado->Foto);
+            $datosEmpleado['Foto']=$request->file('Foto')->store('uploads', 'public');
+        }
+
+
         Empleado::where('id','=',$id)->update($datosEmpleado);
         /* Se vuelve a buscar la información con ese id y se devuelve a ese formulario pero con los datos actualizados */
         $empleado=Empleado::findOrFail($id);
