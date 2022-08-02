@@ -3,6 +3,19 @@
 {{-- Se refactorizó para mostrar o no los valores si es que existen (con isset) --}}
 <h1>{{$modo}} empleado</h1>
 
+{{-- Se muestran los errores de forma estética si no se han rellenado ciertos campos --}}
+@if (count($errors)>0)
+
+    <div class="alert alert-danger" role="alert">
+        <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{$error}}</li>
+        @endforeach
+        </ul>
+    </div>
+
+@endif
+
 <div class="form-group">
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{ isset($empleado->Nombre)?$empleado->Nombre:''}}" id="Nombre" class="form-control">

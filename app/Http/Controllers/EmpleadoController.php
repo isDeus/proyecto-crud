@@ -45,6 +45,24 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         //
+        /* Se añade un array de datos requeridos para su inserción en la BD */
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'ApellidoPaterno'=>'required|string|max:100',
+            'ApellidoMaterno'=>'required|string|max:100',
+            'Correo'=>'required|email',
+            'Foto'=>'required|max:10000|mimes:jpeg,png,jpg',
+        ];
+        /* Se añade el mensaje si no existe el valor requerido */
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            'Foto.required'=>'La foto es requerida'
+        ];
+
+        /* Se hace la validación */
+        $this->validate($request, $campos, $mensaje);
+
+
         //$datosEmpleado = $request->all();
         $datosEmpleado = $request->except('_token');
 
