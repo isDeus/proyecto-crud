@@ -18,7 +18,13 @@ Mostrar la lista de empleados
         @foreach ( $empleados as $empleado)
         <tr>
             <td>{{$empleado->id}}</td>
-            <td>{{$empleado->Foto}}</td>
+
+
+            <td>
+                {{-- Se muestra la imagen que está en storage y que tiene la ruta en empleado -> foto --}}
+                <img src="{{asset('storage').'/'.$empleado->Foto}}" alt="">
+            </td>
+
             <td>{{$empleado->Nombre}}</td>
             <td>{{$empleado->ApellidoPaterno}}</td>
             <td>{{$empleado->ApellidoMaterno}}</td>
