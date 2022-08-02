@@ -8,7 +8,11 @@
 {{Session::get('mensaje')}}
 @endif
 
-<a href="{{url('empleado/create')}}">Registrar nuevo empleado</a>
+{{-- Se usa una clase de bootstrap para darle más detalle --}}
+<a href="{{url('empleado/create')}}" class="btn btn-success">Registrar nuevo empleado</a>
+<br>
+<br>
+
 <table class="table table-light">
 
     <thead class="thead-light">
@@ -32,7 +36,7 @@
 
             <td>
                 {{-- Se muestra la imagen que está en storage y que tiene la ruta en empleado -> foto --}}
-                <img src="{{asset('storage').'/'.$empleado->Foto}}" width="100" alt="">
+                <img src="{{asset('storage').'/'.$empleado->Foto}}" width="100" alt="" class="img-thumbnail img-fluid">
             </td>
 
             <td>{{$empleado->Nombre}}</td>
@@ -42,20 +46,21 @@
             <td>
 
             {{-- Se genera un href que redirige hacia la url de empleado + id + edit  --}}
-            <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}">
+            <a href="{{ url('/empleado/'.$empleado->id.'/edit') }}" class="btn btn-warning">
                 Editar
             </a>
 
             |
 
             {{-- Se crea un boton que envia la información a empleado junto con id a través de un post --}}
-            <form action="{{ url('/empleado/'.$empleado->id) }}" method="POST">
+            <form action="{{ url('/empleado/'.$empleado->id) }}" method="POST" class="d-inline">
             @csrf {{-- llave para que laravel recepcione los datos --}}
             {{-- Se modifica el método desde un post a un delete para poder borrar --}}
             {{method_field('DELETE')}}
             {{-- Botón de confirmación de delete --}}
-            <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar">
+            <input type="submit" onclick="return confirm('¿Quieres borrar?')" value="Borrar" class="btn btn-danger">
             </form>
+
             </td>
         </tr>
         @endforeach
