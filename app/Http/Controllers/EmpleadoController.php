@@ -152,7 +152,9 @@ class EmpleadoController extends Controller
         Empleado::where('id','=',$id)->update($datosEmpleado);
         /* Se vuelve a buscar la información con ese id y se devuelve a ese formulario pero con los datos actualizados */
         $empleado=Empleado::findOrFail($id);
-        return view('empleado.edit', compact('empleado'));
+
+        //return view('empleado.edit', compact('empleado'));
+        return redirect('empleado')->with('mensaje', 'Empleado Modificado');
 
     }
 

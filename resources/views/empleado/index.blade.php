@@ -4,9 +4,18 @@
 <div class="container">
 
 {{-- Si hay un mensaje, muestra ese mensaje --}}
+{{-- Se le añade un estilo para mostrar el mensaje de forma visible --}}
+
 @if (Session::has('mensaje'))
-{{Session::get('mensaje')}}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{Session::get('mensaje')}}
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 @endif
+
 
 {{-- Se usa una clase de bootstrap para darle más detalle --}}
 <a href="{{url('empleado/create')}}" class="btn btn-success">Registrar nuevo empleado</a>
