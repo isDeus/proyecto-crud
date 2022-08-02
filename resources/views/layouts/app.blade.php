@@ -32,8 +32,11 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                    {{-- Se añade un href que redirige a empleado.index en la barra de navegación --}}
                     <ul class="navbar-nav me-auto">
-
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ route('empleado.index') }}">{{ __('Empleado') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
