@@ -22,11 +22,6 @@
 </div>
 
 <div class="form-group">
-<label for="departamento_id">ID de Departamento SELECT</label>
-{{!! Form::select($departamento_id, $departamentos, $equipo->departamento_id, [$class=>'form-control']) !!}}
-</div>
-
-<div class="form-group">
 <label for="Nombre">Nombre</label>
 <input type="text" name="Nombre" value="{{ isset($equipo->Nombre)?$equipo->Nombre:old('Nombre')}}" id="Nombre" class="form-control">
 </div>

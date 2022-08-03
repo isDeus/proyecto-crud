@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Equipo extends Model
 {
     use HasFactory;
+
+    public function departamento(){
+        return $this->hasOne('App\Models\Departamento', 'id', 'categoria_id');
+    }
 }

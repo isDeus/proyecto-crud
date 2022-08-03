@@ -6,14 +6,25 @@
 {{-- Si hay un mensaje, muestra ese mensaje --}}
 {{-- Se le añade un estilo para mostrar el mensaje de forma visible --}}
 
-@if (Session::has('mensaje'))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
+{{-- Manejo de errores básico, se ve si viene con el mensaje failed debido a le sql exception --}}
+@if (Session::get('status')==='failed')
+    @if (Session::has('status'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{Session::get('mensaje')}}
+
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @else
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
     {{Session::get('mensaje')}}
 
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
+    @endif
 @endif
 
 

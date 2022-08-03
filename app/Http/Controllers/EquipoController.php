@@ -6,6 +6,8 @@ use App\Models\Equipo;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\QueryException;
+
 
 class EquipoController extends Controller
 {
@@ -29,8 +31,7 @@ class EquipoController extends Controller
     public function create()
     {
         //
-        $departamentos = Departamento::pluck('Nombre', 'id');
-        return view('equipo.create', compact('departamentos'));
+        return view('equipo.create');
     }
 
     /**
@@ -42,23 +43,31 @@ class EquipoController extends Controller
     public function store(Request $request)
     {
         //
-        $campos=[
-            'departamento_id'=>'required|integer',
-            'Nombre'=>'required|string|max:100',
-            'Codigo'=>'required|string|max:100',
-        ];
-        $mensaje=[
-            'required'=>'El :attribute es requerido',
-        ];
+        //Manejo de errores básico para que la excepción de SQL no arruine toda la ejecución
+        //El id de los equipos sigue aumentando a pesar de los failed query, eso es por diseño de SQL
+        try{
+            $campos=[
+                'departamento_id'=>'required|integer',
+                'Nombre'=>'required|string|max:100',
+                'Codigo'=>'required|string|max:100',
+            ];
+            $mensaje=[
+                'required'=>'El :attribute es requerido',
+            ];
 
-        $this->validate($request, $campos, $mensaje);
+            $this->validate($request, $campos, $mensaje);
 
 
-        $datosEquipo = $request->except('_token');
+            $datosEquipo = $request->except('_token');
 
-        Equipo::insert($datosEquipo);
+            Equipo::insert($datosEquipo);
 
-        return redirect('equipo')->with('mensaje','Equipo agregado con éxito');
+            return redirect('equipo')->with('mensaje','Equipo agregado con éxito');
+        }
+        catch(QueryException $ex){
+            return redirect('equipo')->with('status', 'failed')->with('mensaje','Equipo no pudo ser agregado, la ID del departamento debe existir');
+        }
+
     }
 
     /**
@@ -95,8 +104,9 @@ class EquipoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try{
         $campos=[
-            'ID de Departamento'=>'required|integer',
+            'departamento_id'=>'required|integer',
             'Nombre'=>'required|string|max:100',
             'Codigo'=>'required|string|max:100',
         ];
@@ -113,7 +123,9 @@ class EquipoController extends Controller
         $equipo=Equipo::findOrFail($id);
 
         return redirect('equipo')->with('mensaje', 'Equipo Modificado');
-
+        }catch(QueryException $ex){
+            return redirect('equipo')->with('status', 'failed')->with('mensaje','Equipo no pudo ser modificado, la ID del departamento debe existir');
+        }
     }
 
     /**
