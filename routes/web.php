@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmpleadoController;
+use App\Http\Controllers\EquipoController;
+use App\Http\Controllers\DepartamentoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,10 @@ Route::get('empleado/create', [EmpleadoController::class, 'create']); */
 
 /* Se modificó para requerir el middleware de auth */
 Route::resource('empleado', EmpleadoController::class)->middleware('auth');
+
+Route::resource('equipo', EquipoController::class)->middleware('auth');
+
+Route::resource('departamento', DepartamentoController::class)->middleware('auth');
 
 Auth::routes(['register'=>false, 'reset'=>false]);
 
